@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.demo2.OperatorController">
+
+    <Label text="Operator Panel"/>
+
+    <TextField fx:id="clientName" promptText="Enter client name"/>
+    <!-- Button за създаване на Клиент -->
+    <Button text="Register Client" onAction="#onRegisterClientClick"/>
+    <children>
+        <Label text="Регистриране на нов автомобил" />
+
+        <!-- Падащи списъци за клас, категория и други -->
+        <Label text="Марка" />
+        <ComboBox fx:id="brandComboBox" promptText="Избери марка" />
+
+        <Label text="Модел" />
+        <ComboBox fx:id="modelComboBox" promptText="Избери модел" />
+
+        <Label text="Категория" />
+        <ComboBox fx:id="categoryComboBox" promptText="Избери категория" />
+
+        <Label text="Клас" />
+        <ComboBox fx:id="typeComboBox" promptText="Избери клас" />
+
+        <Label text="Година" />
+        <ComboBox fx:id="yearComboBox" promptText="Избери година" />
+
+        <Label text="Характеристики" />
+        <TextField fx:id="featuresField" promptText="Характеристики (напр. автоматик)" />
+
+        <Button text="Регистрирай автомобил" onAction="#onRegisterCar"/>
+    </children>
+</VBox>
