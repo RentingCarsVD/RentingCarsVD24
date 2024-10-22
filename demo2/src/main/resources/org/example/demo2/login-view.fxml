@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.demo2.HelloController">
+
+    <Label text="Login as:"/>
+    <!-- Admin button -->
+    <Button text="Admin" onAction="#onAdminLogin"/>
+    <!-- Operator button -->
+    <Button text="Operator" onAction="#onOperatorLogin"/>
+    <!-- Client button -->
+    <Button text="Client" onAction="#onClientLogin"/>
+</VBox>

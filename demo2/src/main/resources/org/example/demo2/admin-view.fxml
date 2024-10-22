@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.demo2.AdminController">
+
+    <Label text="Admin Panel"/>
+
+    <TextField fx:id="companyName" promptText="Enter company name"/>
+    <!-- Button за създаване на компания -->
+    <Button text="Create Company" onAction="#onCreateCompanyClick"/>
+
+    <TextField fx:id="operatorName" promptText="Enter operator name"/>
+    <TextField fx:id="operatorPassword" promptText="Enter operator password"/>
+    <!-- Button за създаване на Операотор -->
+    <Button text="Create Operator" onAction="#onCreateOperatorClick"/>
+</VBox>
