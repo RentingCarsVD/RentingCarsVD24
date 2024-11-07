@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rentingcars.controllers.OperatorController">
+
+    <Label layoutX="20.0" layoutY="20.0" style="-fx-font-size: 24px;" text="Операторски панел" />
+    <Button layoutX="20.0" layoutY="80.0" text="Управление на резервации" />
+    <Button layoutX="20.0" layoutY="130.0" text="Поддръжка на автопарк" />
+    <!--onAction="#handleLogout"-->
+    <Button layoutX="527.0" layoutY="349.0" text="Изход" />
+
+    <Label layoutX="217.0" layoutY="242.0" text="Марка" />
+    <ComboBox fx:id="brandComboBox" layoutX="213.0" layoutY="260.0" prefHeight="26.0" prefWidth="81.0" promptText="Избери марка" />
+    <Label layoutX="305.0" layoutY="242.0" text="Модел" />
+    <ComboBox fx:id="modelComboBox" layoutX="305.0" layoutY="260.0" prefHeight="26.0" prefWidth="81.0" promptText="Избери модел" />
+    <Label layoutX="127.0" layoutY="242.0" text="Категория" />
+    <ComboBox fx:id="categoryComboBox" layoutX="127.0" layoutY="260.0" prefHeight="26.0" prefWidth="81.0" promptText="Избери категория" />
+    <Label layoutX="37.0" layoutY="242.0" text="Клас" />
+    <ComboBox fx:id="typeComboBox" layoutX="37.0" layoutY="260.0" prefHeight="26.0" prefWidth="82.0" promptText="Избери клас" />
+    <Label layoutX="394.0" layoutY="242.0" text="Година" />
+    <ComboBox fx:id="yearComboBox" layoutX="394.0" layoutY="260.0" prefHeight="26.0" prefWidth="82.0" promptText="Избери година" />
+    <Label layoutX="36.0" layoutY="295.0" text="Характеристики" />
+    <TextField fx:id="featuresField" layoutX="34.0" layoutY="313.0" prefHeight="26.0" prefWidth="223.0" promptText="Характеристики (напр. автоматик)" />
+    <Button layoutX="34.0" layoutY="349.0" onAction="#onRegisterCar" text="Регистрирай автомобил" />
+    <Label layoutX="184.0" layoutY="207.0" text="Регистриране на нов автомобил" />
+
+    <!-- Зарежда колите -->
+    <ListView fx:id="availableCarsListView" layoutX="295.0" layoutY="14.0" prefHeight="91.0" prefWidth="290.0" />
+   <Button layoutX="295.0" layoutY="117.0" onAction="#loadAvailableCars" text="Налични автомобили" />
+
+</AnchorPane>

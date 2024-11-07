@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="375.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rentingcars.HelloController">
+   <children>
+       <Label fx:id="welcomeText" layoutX="88.80000305175781" layoutY="20.0" text="Добре дошли! Регистрация на потребител" />
+   
+       <Label layoutX="20.0" layoutY="67.0" text="Име:" />
+       <TextField fx:id="nameField" layoutX="20.0" layoutY="95.0" prefHeight="26.0" prefWidth="210.0" />
+   
+       <Label layoutX="20.0" layoutY="139.0" text="Имейл:" />
+       <TextField fx:id="emailField" layoutX="20.0" layoutY="167.0" prefHeight="26.0" prefWidth="209.0" />
+   
+       <Label layoutX="18.0" layoutY="210.0" text="Парола:" />
+       <PasswordField fx:id="passwordField" layoutX="19.0" layoutY="240.0" prefHeight="26.0" prefWidth="210.0" />
+   
+       <Label layoutX="288.0" layoutY="120.0" text="Тип на акаунта:" />
+       <ComboBox fx:id="accountTypeComboBox" layoutX="283.0" layoutY="148.0">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="Admin" />
+                   <String fx:value="Client" />
+                   <String fx:value="Operator" />
+               </FXCollections>
+           </items>
+       </ComboBox>
+
+       <Button layoutX="40.0" layoutY="297.0" onAction="#registerUser" prefHeight="34.0" prefWidth="112.0" text="Регистрация" />
+       <Label layoutX="269.0" layoutY="273.0" text="Вече имате акаунт?" />
+       <Button fx:id="goToLoginButton" layoutX="267.0" layoutY="297.0" onAction="#loginScene" prefHeight="34.0" prefWidth="112.0" text="Вход" />
+   </children>
+
+</AnchorPane>
