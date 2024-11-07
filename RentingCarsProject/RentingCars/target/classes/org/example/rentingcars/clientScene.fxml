@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="368.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rentingcars.controllers.ClientController">
+
+    <Label layoutX="20.0" layoutY="20.0" style="-fx-font-size: 24px;" text="Клиентски панел" />
+    <Button layoutX="20.0" layoutY="80.0" text="Преглед на налични автомобили" />
+    <Button layoutX="20.0" layoutY="130.0" text="Моите резервации" />
+    <!--onAction="#handleLogout"-->
+    <Button layoutX="427.0" layoutY="310.0" text="Изход" />
+    <!-- Зарежда колите -->
+    <ListView fx:id="availableCarsListView" layoutX="253.0" layoutY="56.0" prefHeight="178.0" prefWidth="262.0" />
+   <Button layoutX="253.0" layoutY="241.0" onAction="#loadAvailableCars" text="Налични автомобили" />
+
+</AnchorPane>
