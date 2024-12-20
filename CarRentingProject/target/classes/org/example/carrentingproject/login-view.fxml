@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.carrentingproject.controllers.HelloController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <Label layoutX="129.0" layoutY="35.0" style="-fx-font-size: 24px;" text="Вход в системата" />
+
+    <Label layoutX="53.0" layoutY="114.0" text="Име:" />
+    <TextField fx:id="loginName" layoutX="108.0" layoutY="110.0" prefWidth="230.0" />
+
+    <Label layoutX="51.0" layoutY="174.0" text="Парола:" />
+    <PasswordField fx:id="loginPass" layoutX="108.0" layoutY="170.0" prefWidth="230.0" />
+
+    <Button fx:id="loginButton" layoutX="157.0" layoutY="224.0" prefHeight="26.0" prefWidth="92.0" onAction="#loginUser" text="Вход" />
+
+</AnchorPane>
