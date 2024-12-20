@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.carrentingproject.controllers.AdminController">
+
+    <Text layoutX="60.0" layoutY="56.0" text="Създаване на нова фирма" wrappingWidth="222.3999725341796">
+        <font>
+            <Font name="System Italic" size="18.0" />
+        </font></Text>
+    <TextField fx:id="firmAddressField" layoutX="144.0" layoutY="155.0" promptText="Адрес на фирмата" />
+    <Button layoutX="123.0" layoutY="221.0" onAction="#firmRegistration" text="Създай фирма" />
+    <TextField fx:id="firmNameField" layoutX="144.0" layoutY="110.0" promptText="Име на фирмата" />
+   <Text layoutX="38.0" layoutY="129.0" text="Наименование: " wrappingWidth="115.19996032714835">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Text>
+   <Text layoutX="95.0" layoutY="173.0" text="Адрес: " wrappingWidth="48.00000915527335">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Text>
+
+</AnchorPane>

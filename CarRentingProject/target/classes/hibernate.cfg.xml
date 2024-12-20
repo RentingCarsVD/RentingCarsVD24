@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Връзка към базата данни -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/CarRentingSystem</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">denizpostgre</property>
+
+        <!-- Диалект за PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Настройки за показване на SQL заявките в конзолата -->
+        <!-- <property name="hibernate.show_sql">true</property> -->
+         <property name="hibernate.format_sql">true</property>
+
+         <!-- Автоматично създаване на таблици (само за тест) -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="org.example.carrentingproject.models.Firm"/>
+        <mapping class="org.example.carrentingproject.models.User"/>
+        <mapping class="org.example.carrentingproject.models.Client"/>
+        <mapping class="org.example.carrentingproject.models.Operator"/>
+        <mapping class="org.example.carrentingproject.models.Admin"/>
+        <mapping class="org.example.carrentingproject.models.Car"/>
+        <mapping class="org.example.carrentingproject.models.RentalRequest"/>
+
+    </session-factory>
+</hibernate-configuration>

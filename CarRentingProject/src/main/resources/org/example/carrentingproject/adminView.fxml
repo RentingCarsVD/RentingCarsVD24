@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="573.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.carrentingproject.controllers.AdminController">
+
+    <Label layoutX="160.0" layoutY="14.0" prefHeight="0.0" prefWidth="282.0" style="-fx-font-size: 24px;" text="Администраторски панел" />
+    <Button layoutX="20.0" layoutY="154.0" onAction="#openCreateFirmWindow" prefHeight="26.0" prefWidth="164.0" text="Създаване на нова фирма" />
+    <Button layoutX="260.0" layoutY="115.0" text="Преглед на отчети" />
+    <!-- Бутон за изход -->
+    <Button fx:id="logoutButton" layoutX="20.0" layoutY="115.0" onAction="#logout" text="Изход" />
+    <!-- Зарежда колите -->
+    <ListView fx:id="listView" layoutX="385.0" layoutY="49.0" prefHeight="173.0" prefWidth="282.0" />
+    <Button layoutX="271.0" layoutY="76.0" onAction="#showAllCars"  text="Преглед на коли" />
+    <!-- Нов оператор -->
+    <Button layoutX="20.0" layoutY="194.0" onAction="#manageOperatorsButton" text="Управление на оператори" />
+    <AnchorPane fx:id="registerOperatorPanel" layoutX="271.0" layoutY="302.0" prefHeight="229.0" prefWidth="413.0" visible="false">
+        <children>
+            <Label layoutY="1.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Регистриране на оператор" />
+            <TextField fx:id="operatorName" layoutY="45.0" prefHeight="26.0" prefWidth="233.0" promptText="Име на оператора" />
+            <TextField fx:id="operatorEmail" layoutY="82.0" prefHeight="26.0" prefWidth="233.0" promptText="Имейл на оператора" />
+            <PasswordField fx:id="operatorPassword" layoutY="117.0" prefHeight="26.0" prefWidth="233.0" promptText="Парола" />
+            <ComboBox fx:id="firmComboBox" layoutY="160.0" prefHeight="26.0" prefWidth="154.0" promptText="Изберете фирма" />
+            <Button layoutX="166.0" layoutY="160.0" onAction="#addOperatorToFirm" text="Добави оператор" />
+            <ComboBox fx:id="operatorComboBox" layoutX="266.0" layoutY="45.0" prefHeight="26.0" prefWidth="154.0" promptText="Изберете оператор" />
+         <Label layoutX="242.0" layoutY="1.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Назначаване на оператор" />
+        </children>
+    </AnchorPane>
+    <Button layoutX="382.0" layoutY="232.0" onAction="#showAllFirms" text="Преглед на фирми" />
+   <Button layoutX="526.0" layoutY="263.0" onAction="#removeSelectedOperator" text="Премахване на оператор" />
+   <Button layoutX="526.0" layoutY="232.0" onAction="#showAllOperators" text="Преглед на оператори" />
+
+</AnchorPane>
