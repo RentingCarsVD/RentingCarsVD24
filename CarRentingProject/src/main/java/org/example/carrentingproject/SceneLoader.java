@@ -28,18 +28,4 @@ public class SceneLoader {
         return scene;
     }
 
-//    public static <T> Scene loadSceneWithController(String fxmlFile, int width, int height, List<Object> repositories, Consumer<T> controllerConsumer) throws IOException {
-//        FXMLLoader loader = new FXMLLoader(SceneLoader.class.getResource(fxmlFile));
-//        Parent root = loader.load();
-//
-//        // Вземане на контролера
-//        T controller = loader.getController();
-//
-//        // Предаване на данни чрез consumer
-//        if (controllerConsumer != null) {
-//            controllerConsumer.accept(controller);
-//        }
-//
-//        return new Scene(root, width, height);
-//    }
 }

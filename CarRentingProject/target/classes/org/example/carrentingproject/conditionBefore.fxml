@@ -5,19 +5,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.carrentingproject.controllers.ConditionController">
+    <stylesheets>
+    </stylesheets>
+    <Label layoutX="20.0" layoutY="134.0" text="Въведeте състоянието на колата" />
 
-    <Label layoutX="20.0" layoutY="55.0" text="Въведeте състоянието на колата" />
+    <TextField fx:id="conditionField" layoutX="20.0" layoutY="163.0" prefHeight="26.0" prefWidth="282.0" promptText="Състояние на колата по време на наемане..." />
 
-    <TextField fx:id="conditionField" layoutX="20.0" layoutY="84.0" prefHeight="26.0" prefWidth="282.0"
-               promptText="Състояние на колата по време на наемане..." />
-
-    <Label fx:id="requestFromClient" layoutX="20" layoutY="20" text="Детайли на заявката" />
+    <Label fx:id="requestFromClient" layoutX="20.0" layoutY="28.0" text="Виж детайлите на заявката" />
 
     <!-- Бутон за приемане на заявката -->
-    <Button layoutX="50" layoutY="150" text="Приеми" />
+    <Button fx:id="acceptButton" layoutX="50.0" layoutY="199.0" onAction="#handleButtonClick" text="Приеми" />
 
     <!-- Бутон за отхвърляне на заявката -->
-    <Button layoutX="150" layoutY="150" text="Отхвърли" />
+    <Button fx:id="declineButton" layoutX="150.0" layoutY="199.0" onAction="#handleButtonClick" text="Отхвърли" />
 
 </AnchorPane>

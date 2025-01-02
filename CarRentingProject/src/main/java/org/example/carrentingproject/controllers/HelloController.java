@@ -1,7 +1,9 @@
 package org.example.carrentingproject.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
@@ -30,6 +32,7 @@ public class HelloController implements RepositoryInjected {
     private ComboBox<String> accountTypeComboBox;
 
     private UserRepository userRepository;
+
 
     // Конструктор без параметри за FXML
     public HelloController() {}
@@ -118,8 +121,14 @@ public class HelloController implements RepositoryInjected {
         //Взимаме типа на на акаунта
         String accountType = user.getAccountType();
         log.info("Успешен вход: " + user.getName() + " с тип акаунт: " + accountType);
-            showAlert("Добре дошли, " + user.getName() + "!");
+        showAlert("Добре дошли, " + user.getName() + "!");
+
+        Stage loginStage = (Stage) loginName.getScene().getWindow();
+        loginStage.close();
+
         navigateToScene(accountType);
+        loginName.clear();
+        loginPass.clear();
     }
 
     // Отваряне на Login прозорче oт hello-view.fxml
@@ -156,13 +165,13 @@ public class HelloController implements RepositoryInjected {
 
         if ("ADMIN".equals(accountType)) {
             nextScene = SceneLoader.loadScene("/org/example/carrentingproject/adminView.fxml",
-                    740, 540, repositories);
+                    740, 590, repositories);
         } else if ("OPERATOR".equals(accountType)) {
             nextScene = SceneLoader.loadScene("/org/example/carrentingproject/operatorView.fxml",
-                    680, 480, repositories);
+                    680, 520, repositories);
         } else {
             nextScene = SceneLoader.loadScene("/org/example/carrentingproject/clientView.fxml",
-                    600, 440, repositories);
+                    560, 420, repositories);
         }
         // Създаване на нов Stage
         Stage stage = new Stage();
@@ -176,6 +185,11 @@ public class HelloController implements RepositoryInjected {
         alert.setTitle("Информация");
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+
         alert.showAndWait();
     }
 

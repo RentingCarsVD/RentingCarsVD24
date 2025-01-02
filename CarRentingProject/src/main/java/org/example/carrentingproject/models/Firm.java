@@ -25,8 +25,7 @@ public class Firm {
     private List<User> users = new ArrayList<>();
 
     // Празен конструктор за Hibernate
-    public Firm() {
-    }
+    public Firm() {}
 
     public Firm(String name, String address, String operatorNames) {
         this.name = name;

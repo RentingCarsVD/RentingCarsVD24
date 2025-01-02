@@ -14,4 +14,11 @@ public class FirmRepository extends GenericRepository<Firm> {
         super(entityClass);
         //this.databaseManager = databaseManager;
     }
+
+    public Optional<Firm> findByName(String name) {
+        return getAll().stream()
+                .filter(firm -> firm.getName().equalsIgnoreCase(name))
+                .findFirst();
+    }
+
 }

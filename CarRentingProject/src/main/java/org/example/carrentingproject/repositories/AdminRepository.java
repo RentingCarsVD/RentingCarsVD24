@@ -2,9 +2,11 @@ package org.example.carrentingproject.repositories;
 
 import org.apache.log4j.Logger;
 import org.example.carrentingproject.database.DatabaseManager;
+import org.example.carrentingproject.models.Client;
 import org.example.carrentingproject.models.Firm;
 import org.example.carrentingproject.models.Operator;
 import org.example.carrentingproject.models.User;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +34,16 @@ public class AdminRepository extends GenericRepository<Firm> {
                         .list()
         );
     }
+
+    public List<Operator> getOperatorsByFirm(long firmId) {
+        return DatabaseManager.getInstance().execute(session -> {
+            Query<Operator> query = session.createQuery(
+                    "FROM Operator WHERE firm.id = :firmId", Operator.class);
+            query.setParameter("firmId", firmId);
+            return query.list();
+        });
+    }
+
 
     // Актуализираме operator_names в firms_table
     public void assignOperatorToFirm(Long firmId, Long operatorId)
