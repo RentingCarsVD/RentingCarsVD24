@@ -4,6 +4,7 @@ import org.example.carrentingproject.controllers.RentalRequestController;
 
 import javax.persistence.*;
 import java.lang.ref.Cleaner;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -23,14 +24,21 @@ public class RentalRequest {
     @JoinColumn(name = "client_id", nullable = false)
     private Client clientName; // Клиентът, направил заявката
 
-//    @Column(name = "car_brand", nullable = false)
-//    private String carBrand; // Марката на колата
+    // Сума, която клиентът дължи
+    @Column(name = "amount_due")
+    private Double amountDue;
+
+    private LocalDate rentalStartDate;
+    private LocalDate rentalEndDate;
 
     @Column(name = "request_time", nullable = false)
     private LocalDateTime requestTime; // Датата на подаване на заявката
 
     @Column(name = "rented_days", nullable = false)
     private int rentalDays;
+
+    @Column(name = "initialrentaldays")
+    private Integer initialRentalDays;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -59,7 +67,6 @@ public class RentalRequest {
     public RentalRequest(Car car, Client clientName, LocalDateTime requestTime, int rentalDays, RentalRequestController.RentalStatus status, Operator operatorName, Firm firm, String carConditionBefore, String carConditionAfter, String returnStatus) {
         this.car = car;
         this.clientName = clientName;
-        //this.carBrand = carBrand;
         this.requestTime = requestTime;
         this.rentalDays = rentalDays;
         this.status = status;
@@ -70,12 +77,40 @@ public class RentalRequest {
         this.returnStatus = returnStatus;
     }
 
+    public String getCarName() {
+        return this.car.getBrand() + " " + car.getModel(); // Ако обектът `Car` е свързан с заявката
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getRentalStartDate() {
+        return rentalStartDate;
+    }
+
+    public void setRentalStartDate(LocalDate rentalStartDate) {
+        this.rentalStartDate = rentalStartDate;
+    }
+
+    public LocalDate getRentalEndDate() {
+        return rentalEndDate;
+    }
+
+    public void setRentalEndDate(LocalDate rentalEndDate) {
+        this.rentalEndDate = rentalEndDate;
+    }
+
+    public Double getAmountDue() {
+        return amountDue;
+    }
+
+    public void setAmountDue(double amountDue) {
+        this.amountDue = amountDue;
     }
 
     public Car getCar() {
@@ -94,13 +129,13 @@ public class RentalRequest {
         this.clientName = clientName;
     }
 
-//    public String getCarBrand() {
-//        return carBrand;
-//    }
+    public int getInitialRentalDays() {
+        return initialRentalDays;
+    }
 
-//    public void setCarBrand(String carBrand) {
-//        this.carBrand = carBrand;
-//    }
+    public void setInitialRentalDays(int initialRentalDays) {
+        this.initialRentalDays = initialRentalDays;
+    }
 
     public LocalDateTime getRequestTime() {
         return requestTime;
@@ -168,9 +203,15 @@ public class RentalRequest {
 
     @Override
     public String toString() {
-        return "Заявка за кола: {" +
-                car.getBrand() + " " + car.getModel() +
-                ", status=" + status +
-                '}';
+        if (status == status.COMPLETED) {
+            return "Request ID: " + id +
+                    ", Client: " + clientName +
+                    ", Status: " + status;
+        } else {
+            return "Заявка за кола: {" +
+                    car.getBrand() + " " + car.getModel() +
+                    ", status=" + status +
+                    '}';
+        }
     }
 }

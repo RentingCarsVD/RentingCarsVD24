@@ -3,6 +3,7 @@ package org.example.carrentingproject.models;
 import org.example.carrentingproject.controllers.RentalRequestController;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cars_table") // Името на таблицата в базата данни
@@ -39,6 +40,11 @@ public class Car {
 
     @Column(name = "kilometers_driven")
     private Double kilometersDriven;
+    @Column(name = "kilometers_atStart")
+    private Double kilometersAtStart;
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RentalRequest> rentalRequests;
 
     public Car() {}
 
@@ -52,6 +58,14 @@ public class Car {
         this.isAvailable = isAvailable;
         this.firm = firm;
         this.kilometersDriven = kilometersDriven;
+    }
+
+    public Double getKilometersAtStart() {
+        return kilometersAtStart;
+    }
+
+    public void setKilometersAtStart(Double kilometersAtStart) {
+        this.kilometersAtStart = kilometersAtStart;
     }
 
     public Long getId() {
@@ -118,8 +132,12 @@ public class Car {
         isAvailable = available;
     }
 
-    public String selectedCarView(){
-        return brand + " модел: " + model + " " + category + " " + features + " година(" + year + ")";
+    public List<RentalRequest> getRentalRequests() {
+        return rentalRequests;
+    }
+
+    public void setRentalRequests(List<RentalRequest> rentalRequests) {
+        this.rentalRequests = rentalRequests;
     }
 
     public Firm getFirm() {

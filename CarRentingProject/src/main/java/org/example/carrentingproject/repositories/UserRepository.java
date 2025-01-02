@@ -1,6 +1,7 @@
 package org.example.carrentingproject.repositories;
 
 import org.example.carrentingproject.database.DatabaseManager;
+import org.example.carrentingproject.models.Client;
 import org.example.carrentingproject.models.Operator;
 import org.example.carrentingproject.models.User;
 import org.hibernate.query.Query;
@@ -46,6 +47,16 @@ public class UserRepository extends GenericRepository<User>{
             Query<Operator> query = session.createQuery("FROM Operator WHERE name = :name", Operator.class);
             query.setParameter("name", name);
             return Optional.ofNullable(query.uniqueResult());
+        });
+    }
+
+    // Лист на всички клиенти за дадена фирма
+    public List<Client> getClientsByFirm(long firmId) {
+        return databaseManager.execute(session -> {
+            Query<Client> query = session.createQuery(
+                    "FROM Client WHERE firm.id = :firmId", Client.class);
+            query.setParameter("firmId", firmId);
+            return query.list();
         });
     }
 }

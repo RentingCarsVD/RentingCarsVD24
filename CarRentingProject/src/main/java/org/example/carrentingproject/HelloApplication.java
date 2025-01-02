@@ -1,14 +1,12 @@
 package org.example.carrentingproject;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.log4j.Logger;
-import org.example.carrentingproject.controllers.HelloController;
 import org.example.carrentingproject.database.DatabaseManager;
 import org.example.carrentingproject.models.User;
-import org.example.carrentingproject.repositories.GenericRepository;
 import org.example.carrentingproject.repositories.UserRepository;
 
 import java.io.IOException;
@@ -36,7 +34,7 @@ public class HelloApplication extends Application {
         List<Object> repositories = new ArrayList<>();
         repositories.add(userRepository);
 
-        Scene scene = SceneLoader.loadScene("hello-view.fxml",480, 380, repositories);
+        Scene scene = SceneLoader.loadScene("hello-view.fxml",440, 380, repositories);
         stage.setTitle("CarRentingApplication!");
         stage.setScene(scene);
         stage.show();

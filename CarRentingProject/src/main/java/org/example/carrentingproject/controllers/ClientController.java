@@ -1,6 +1,7 @@
 package org.example.carrentingproject.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,46 +27,60 @@ public class ClientController implements RepositoryInjected {
     @FXML
     private ListView<Car> carlistView;
     @FXML
-    private ListView firmsListView;
+    private ListView<String> generalListView;
 
     private FirmRepository firmRepository;
     private CarRepository carRepository;
     private UserRepository userRepository;
     private RequestRepository requestRepository;
 
+    Client currentClient = GlobalData.getCurrentClient();
+    Car currentCar = GlobalData.getCurrentCar();
+
 
     @FXML // Label за фирма
-    private void initialize() {
-        Client currentClient = GlobalData.getCurrentClient();
-        if (currentClient != null && currentClient.getSelectedFirm() != null) {
+    private void initialize()
+    {
+        if (currentClient != null && currentClient.getSelectedFirm() != null)
+        {
             firmNameLabel.setText("Фирма: " + currentClient.getSelectedFirm().getName());
         } else {
             firmNameLabel.setText("Изберете фирма");
         }
 
+        generalListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Check for double-click
+                updateClientWithFirm(); // Call the method
+            }
+        });
     }
 
     @FXML // Списък с фирми
     private void showFirmsList() {
         List<Firm> firms = firmRepository.getAll();
-        // Показваме фирмите в ListView
-        firmsListView.getItems().setAll(firms);
+        if (firms == null || firms.isEmpty()) {
+            showAlert("Няма налични фирми.");
+            log.info("No firms found in the database.");
+            generalListView.getItems().clear();
+        } else {
+            generalListView.getItems().setAll(firms.stream()
+                    .map(Firm::getName)
+                    .toList());
+        }
 
     }
 
     @FXML // Списък с колите на фирмата
     private void showFirmsCarsList()
     {
-        Client currentClient = GlobalData.getCurrentClient();
-
-        Firm selectedFirm = currentClient.getSelectedFirm();
-        if (selectedFirm == null) {
+        Firm clientSelectedFirm = currentClient.getSelectedFirm();
+        if (clientSelectedFirm == null) {
             showAlert("Моля, изберете фирма преди да продължите!");
             log.error("No firm selected by the client.");
             return;
         }
 
-        List<Car> cars = carRepository.getCarsByFirm(selectedFirm.getId());
+        List<Car> cars = carRepository.getCarsByFirm(clientSelectedFirm.getId());
         if (cars == null || cars.isEmpty()) {
             showAlert("Фирмата няма налични автомобили.");
             log.info("The selected firm has no available cars.");
@@ -89,7 +104,7 @@ public class ClientController implements RepositoryInjected {
         repositories.add(requestRepository);
         repositories.add(userRepository);
 
-        Scene rentalScene = SceneLoader.loadScene("rentalRequestView.fxml", 380, 270, repositories);
+        Scene rentalScene = SceneLoader.loadScene("rentalRequestView.fxml", 490, 280, repositories);
 
         Stage createFirmStage = new Stage();
         createFirmStage.setTitle("Попълване на заявка");
@@ -98,44 +113,55 @@ public class ClientController implements RepositoryInjected {
         createFirmStage.showAndWait();
     }
 
+    @FXML // Списък с наети коли
+    private void showOwnedCars()
+    {
+        List<RentalRequest> requests = requestRepository.findRequestsByClient(currentClient.getId());
+
+        if (requests != null && !requests.isEmpty()) {
+            ObservableList<String> rentedCars = FXCollections.observableArrayList();
+            for (RentalRequest request : requests) {
+                String carInfo = "Кола: " + request.getCar().getBrand() +
+                        ", Модел: " + request.getCar().getModel() +
+                        ", Дни на наем: " + request.getRentalDays();
+                rentedCars.add(carInfo);
+            }
+            generalListView.setItems(rentedCars);
+        } else {
+            generalListView.setItems(FXCollections.observableArrayList("Нямате наети коли."));
+        }
+    }
+
     // Aктуализираме firm_id & selected_firm_id за избрана фирма
     @FXML
     private void updateClientWithFirm() {
         // Избор на фирма от ListView
-        Firm selectedFirm = (Firm) firmsListView.getSelectionModel().getSelectedItem();
-        if (selectedFirm == null) {
+        String selectedFirmName = generalListView.getSelectionModel().getSelectedItem();
+        if (selectedFirmName == null) {
             showAlert("Моля, изберете фирма!");
             return;
         }
+        Firm selectedFirm = firmRepository.findByName(selectedFirmName)
+                .orElseThrow(() -> new IllegalArgumentException("Фирмата не е намерена."));
+
         // Извличаме текущия клиент от GlobalData
-        Client currentClient = GlobalData.getCurrentClient();
+        //Client currentClient = GlobalData.getCurrentClient();
         if (currentClient == null) {
             showAlert("Няма избран клиент!");
             return;
         }
 
-        // Извличаме клиента от базата данни чрез неговото ID
-        Optional<User> optionalUser = userRepository.getById(currentClient.getId());
+        currentClient.setSelectedFirm(selectedFirm);
+        currentClient.setFirm(selectedFirm);
 
-        // Проверяваме дали това е обект от тип Client
-        User user = optionalUser.get();
-
-        if (user instanceof Client client)
-        {
-            client.setSelectedFirm(selectedFirm);  // Актуализираме `selectedFirm`
-            client.setFirm(selectedFirm);  // Актуализираме също и `firm_id`
-
-            try {
-                userRepository.update(client);
-                // Обновяваме клиента в GlobalData
-                GlobalData.setCurrentClient(client);
-                    showAlert("Успешно избрахте фирма за наемане на коли!");
-                updateFirmNameLabel(selectedFirm);
-            } catch (Exception e) {
-                showAlert("Възникна грешка при актуализацията на клиента: " + e.getMessage());
-            }
-        } else {
-            showAlert("Този потребител не е клиент.");
+        try {
+            userRepository.update(currentClient);
+            GlobalData.setCurrentClient(currentClient);
+            showAlert("Успешно избрахте фирма за наемане на коли!");
+            updateFirmNameLabel(selectedFirm);
+        } catch (Exception e) {
+            log.error("Failed to update client with firm.", e);
+            showAlert("Възникна грешка при актуализацията на клиента: " + e.getMessage());
         }
     }
 
@@ -148,6 +174,11 @@ public class ClientController implements RepositoryInjected {
         alert.setTitle("Информация");
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm()); // Път до CSS файла
+        dialogPane.getStyleClass().add("dialog-pane");
+
         alert.showAndWait();
     }
 
@@ -165,7 +196,7 @@ public class ClientController implements RepositoryInjected {
             }
         }
     }
-    // Затваряме текущата сцена
+
     @FXML
     private void logout() {
         Stage stage = (Stage) carlistView.getScene().getWindow();

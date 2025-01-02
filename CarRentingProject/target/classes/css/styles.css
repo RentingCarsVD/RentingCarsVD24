@@ -1,0 +1,51 @@
+/* Основен стил за диалоговите прозорци */
+.dialog-pane {
+    -fx-background-color: #eaf6ff; /* Много светло син фон */
+    -fx-border-color: #0073e6; /* Син контур */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10; /* Леко заоблени ръбове */
+    -fx-background-radius: 10;
+}
+
+/* Текст в заглавието на AlertBox */
+.dialog-pane .header-panel {
+    -fx-background-color: #0073e6; /* Син фон за заглавието */
+    -fx-text-fill: white; /* Бял текст */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+
+/* Основен текст на съдържанието */
+.dialog-pane .content {
+    -fx-text-fill: #333333; /* Тъмен текст за съдържанието */
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+}
+
+/* Бутоните в AlertBox */
+.dialog-pane .button-bar .button {
+    -fx-background-color: #0073e6; /* Син фон на бутоните */
+    -fx-text-fill: white; /* Бял текст */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5; /* Леко заоблени ръбове */
+    -fx-border-radius: 5;
+    -fx-padding: 5 10;
+}
+
+/* Hover ефект за бутоните */
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #005bb5; /* По-тъмно синьо при hover */
+    -fx-cursor: hand; /* Променя курсора на ръка */
+}
+
+/* Активен бутон */
+.dialog-pane .button-bar .button:focused {
+    -fx-border-color: #005bb5;
+    -fx-border-width: 2px;
+}
+
+
+
+
